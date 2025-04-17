@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Биология 8-сынып</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+      overflow-x: hidden;
+    }
+
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 8px 15px;
+      font-weight: bold;
+      font-size: 1em;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00ffd5;
+    }
+
+    .content {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: rgb(198, 217, 230);
+      text-shadow: 0 0 10px rgb(181, 182, 218);
+      padding: 0 15px;
+    }
+
+    .content h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 1.5em;
+    }
+
+    @media (max-width: 768px) {
+      .content h1 {
+        font-size: 2em;
+      }
+      .content p {
+        font-size: 1.2em;
+      }
+      nav a {
+        font-size: 0.9em;
+        margin: 5px 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content h1 {
+        font-size: 1.6em;
+      }
+      .content p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="bg-video" playsinline>
+    <source src="video.mp4" type="video/mp4" />
+    <!-- Мобильдіде видео жүктелмесе, фоновый сурет қоюға болады -->
+  </video>
+
+  <div class="overlay"></div>
+
+  <nav>
+    <a href="/">Басты бет</a>
+    <a href="/">Тақырыптар</a>
+    <a href="test.html">Тесттер</a>
+    <a href="/">Зертханалық жұмыстар</a>
+    <a href="/">Тапсырмалар</a>
+    <a href="/">Бейне сабақтар</a>
+  </nav>
+
+  <div class="content">
+    <h1>Биология 8-сынып</h1>
+    <a href="/"><p>Білімге қадам бас!</p></a>
+  </div>
+</body>
+</html>

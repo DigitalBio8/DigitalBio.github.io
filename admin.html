@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="kk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title data-kk="Админдер" data-ru="Админы">Админдер</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #e8f5e9, #ffffff);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #606cd8;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .lang-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 20;
+        }
+
+        .lang-toggle button {
+            background-color: #fff;
+            border: 2px solid #546bce;
+            color: #6755cf;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-left: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .lang-toggle button:hover {
+            background-color: #5759ce;
+            color: white;
+        }
+
+        .admin-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .admin-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .admin-card:hover {
+            transform: scale(1.05);
+        }
+
+        .admin-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .admin-card h3 {
+            color: #4d4fd1;
+            margin-bottom: 10px;
+        }
+
+        .admin-card p {
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lang-toggle">
+        <button onclick="switchLang('kk')">Қазақша</button>
+        <button onclick="switchLang('ru')">Русский</button>
+    </div>
+
+    <header>
+        <h1 data-kk="Админдер" data-ru="Админы">Админдер</h1>
+        <p data-kk="Сайтты әзірлеген және жүргізіп отырған тұлғалар"
+            data-ru="Люди, разработавшие и ведущие сайт">Сайтты әзірлеген және жүргізіп отырған тұлғалар</p>
+    </header>
+
+    <div class="admin-container">
+        <div class="admin-card">
+            <img src="admin/Nemis.jfif" alt="admin1">
+            <h3>Джуманова Енис</h3>
+            <p data-kk="Биология пәнінің мұғалімі, контент авторы"
+               data-ru="Учитель биологии, автор контента">Биология пәнінің мұғалімі, контент авторы</p>
+        </div>
+        <div class="admin-card">
+            <img src="admin/Alina.jfif" alt="admin2">
+            <h3>Дүйсенбек Алина</h3>
+            <p data-kk="Веб-әзірлеуші, сайт құрылымын жасаған"
+               data-ru="Веб-разработчик, создатель структуры сайта">Веб-әзірлеуші, сайт құрылымын жасаған</p>
+        </div>
+        <div class="admin-card">
+            <img src="admin/Madina.jfif" alt="admin3">
+            <h3>Түшенбек Мадина</h3>
+            <p data-kk="Аудармашы және редактор, қазақ-орыс тілдерінде"
+               data-ru="Переводчик и редактор на казахском и русском языках">Аудармашы және редактор</p>
+        </div>
+        <div class="admin-card">
+            <img src="admin/Aizat.jfif" alt="admin4">
+            <h3>Хасенова Айзат</h3>
+            <p data-kk="Видеосабақтарды дайындаушы және монтаждаушы"
+               data-ru="Создатель и монтажёр видеоуроков">Видеосабақтарды дайындаушы және монтаждаушы</p>
+        </div>
+    </div>
+
+    <script>
+        function switchLang(lang) {
+            // Тілді сақтау
+            localStorage.setItem('lang', lang);
+    
+            // Барлық элементтерді жаңарту
+            document.querySelectorAll('[data-kk]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+    
+            // Батырмаларды жаңарту
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.lang-toggle button[onclick*="${lang}"]`).classList.add('active');
+        }
+    
+        // Бет жүктелгенде сақталған тілді қолдану
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('lang') || 'ru';
+            switchLang(savedLang);
+        });
+    
+        function checkAnswers() {
+            const answers = { q1: "c", q2: "b" };
+            let score = 0;
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name=${q}]:checked`);
+                if (selected && selected.value === answers[q]) score++;
+            }
+            const lang = localStorage.getItem('lang') || 'ru';
+            document.getElementById("result").innerHTML = lang === 'ru'
+                ? `Ваш результат: ${score}/2`
+                : `Сіздің нәтижеңіз: ${score}/2`;
+            document.getElementById("result").style.color = score === 2 ? "green" : "orange";
+        }
+    </script>
+    <!-- Әлеуметтік желі футері -->
+<footer style="background-color:#637fcc; color:white; padding:20px; text-align:center; display: block; margin-top:350px;">
+    <p style="font-size: 18px; margin-bottom: 15px;">Бізді әлеуметтік желілерден табыңыз:</p>
+    
+    <a href="https://t.me/your_channel" target="_blank" style="margin: 0 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" width="30" title="Telegram">
+    </a>
+
+    <a href="https://www.instagram.com/your_profile" target="_blank" style="margin: 0 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="30" title="Instagram">
+    </a>
+
+    <a href="https://www.tiktok.com/@your_username" target="_blank" style="margin: 0 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" width="30" title="TikTok">
+    </a>
+
+    <a href="https://wa.me/77001234567" target="_blank" style="margin: 0 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" width="30" title="WhatsApp">
+    </a>
+
+    <a href="mailto:your@email.com" target="_blank" style="margin: 0 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" width="30" title="Email">
+    </a>
+
+    <p style="margin-top: 15px; font-size: 14px;">&copy; 2025 Биология 8-сынып. Барлық құқықтар қорғалған.</p>
+</footer>
+    
+</body>
+
+</html>
